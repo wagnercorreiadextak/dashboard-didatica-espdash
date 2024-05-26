@@ -30,38 +30,51 @@
 
 /* Inclusões próprias */
 #include "Configuracao.h"
+#include "Rele.h"
+#include "Mqtt.h"
+#include "Tarefas.h"
 
-void callBackBotoes() {
-  /* Button card callback */
-  cardRele1.attachCallback([&](int value){
-    Serial.println("Button Callback Triggered: "+String((value == 1)?"true":"false"));
-    /* Button card updater - you need to update the button with latest value upon firing of callback */
-    cardRele1.update(value);
-    /* Send update to dashboard */
-    dashboard.sendUpdates();
-  });
-}
-
-void setup() {
-  Serial.begin(115200);
-
+void iniciarWifi() {
   /* Connect WiFi */
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
-      Serial.printf("WiFi Failed!\n");
-      return;
-  }
-  Serial.print("IP Address: ");
-  Serial.println(WiFi.localIP());
 
+  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.printf("WiFi Failed!\n");
+    return;
+  } else {
+    Serial.print("IP Address: ");
+    Serial.println(WiFi.localIP());
+  }
+
+}
+
+void webServerTask() {
   /* Start AsyncWebServer */
   server.begin();
+}
 
-  callBackBotoes();
+void setup() {
+
+  Serial.begin(115200);
+  configurarPortas();
+
+  //Mostra no monitor em qual core o setup() foi chamado
+  Serial.println(xPortGetCoreID());
+
+  iniciarWifi();
+  webServerTask();
+  iniciarMqtt();
+  
+  callBackBotoesRele();
+
+  agendarTarefas();
+
+  delay(100);
 }
 
 void loop() {
+
   /* Update Card Values */
   card1Mqtt.update("Publicando", "s");
   cardTemperatura.update((int)random(0, 50));

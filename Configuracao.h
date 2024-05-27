@@ -1,6 +1,6 @@
 /* Wifi */
-const char* ssid = "wagner_rede";
-const char* password = "73ax9192";
+const char* ssid = "wagner-nokia";
+const char* password = "13041968";
 
 /* WebServer */
 AsyncWebServer server(80);

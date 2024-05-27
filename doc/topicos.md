@@ -17,7 +17,7 @@ valor -> valor coletado
 **Controle dos relés:**
 
 Tópico: espdash/automacao/rele
-Objetos esperado:
+Objeto esperado:
 
 {
   "rele": 0,
@@ -26,4 +26,4 @@ Objetos esperado:
 
 Legenda
 rele -> posição do relé
-status\ -> 1: ligar / 2: desligar
+status -> 1: ligar / 2: desligar

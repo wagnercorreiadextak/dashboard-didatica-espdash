@@ -32,6 +32,9 @@
 #include "Configuracao.h"
 #include "Rele.h"
 #include "Mqtt.h"
+#include "SensorTemperatura.h"
+#include "StatusSensores.h"
+#include "DisplayOled.h"
 #include "Tarefas.h"
 
 void iniciarWifi() {
@@ -45,6 +48,7 @@ void iniciarWifi() {
   } else {
     Serial.print("IP Address: ");
     Serial.println(WiFi.localIP());
+    enderecoIp = WiFi.localIP();
   }
 
 }
@@ -68,24 +72,14 @@ void setup() {
   
   callBackBotoesRele();
 
+  iniciarDisplay();
+
   agendarTarefas();
 
   delay(100);
+  
 }
 
 void loop() {
-
-  /* Update Card Values */
-  card1Mqtt.update("Publicando", "s");
-  cardTemperatura.update((int)random(0, 50));
-  cardIntensidadeLuz.update((int)random(0, 100));
-
-  /* Send Updates to our Dashboard (realtime) */
-  dashboard.sendUpdates();
-
-  /* 
-    Delay is just for demonstration purposes in this example,
-    Replace this code with 'millis interval' in your final project.
-  */
-  delay(3000);
+  
 }

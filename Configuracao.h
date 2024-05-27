@@ -39,6 +39,8 @@ int portaLedVerde = 4;
 int portaBtnAzul = 34;
 int portaLedAzul = 2;
 
+IPAddress enderecoIp;
+
 void configurarPortas() {
 
   //Configura as portas de rele

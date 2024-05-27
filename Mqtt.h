@@ -6,8 +6,10 @@ const char* mqtt_server = "test.mosquitto.org";
 WiFiClient espClientWi;
 PubSubClient clientMqtt(espClientWi);
 
-const char* topicoRele = "espdash/automacao/rele";
 const char* idMqtt = "espdash-automacao-000001";
+
+const char* topicoRele = "espdash/automacao/rele";
+const char* topicoSensor = "espdash/automacao/sensor";
 
 void ouvirMqtt(char* topic, byte* message, unsigned int length) {
 
@@ -60,7 +62,7 @@ void reconnectMqtt() {
       Serial.println(" try again in 5 seconds");
     }
   } else {
-    digitalWrite(portaLedAzul, LOW);
+    digitalWrite(portaLedVemelho, LOW);
   }
 }
 

@@ -1,6 +1,6 @@
-Documentação dos tópicos
+**Documentação dos tópicos**
 
-Dados dos sensores:
+**Dados dos sensores:**
 
 Tópico: espdash/automacao/sensor
 Objeto retornado: 
@@ -14,7 +14,7 @@ Legenda
 sensor -> nome do sensor
 valor -> valor coletado
 
-Controle dos relés: 
+**Controle dos relés:**
 
 Tópico: espdash/automacao/rele
 Objetos esperado:
